@@ -10,16 +10,17 @@ package com.mycompany.lab4;
  */
 public class Table {
 
-    private String[] table = {"1", "2", "3", "4", "5", "6", "7", "8", "9"};
+    private char[] table  = {'1','2','3','4','5','6','7','8','9' };
     private Player player1, player2, currentPlayer;
 
     public Table(Player player1, Player player2) {
         this.player1 = player1;
         this.player2 = player2;
+        this.currentPlayer = player1;
 
     }
 
-    public String[] getTable() {
+    public char[] getTable() {
         return table;
     }
 
@@ -28,11 +29,12 @@ public class Table {
     }
 
     public boolean setPosition(int position) {
-        if (table[position - 1].equals("X") || table[position - 1].equals("X")) {
+        if (table[position - 1]=='X'||table[position - 1]=='O') {
             return false;
-        }else{
+        } else {
+            table[position - 1] = currentPlayer.getSymbol();
             return true;
         }
-        
+
     }
 }
