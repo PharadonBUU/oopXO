@@ -48,4 +48,16 @@ public class Player {
     public void setDrawCount(int drawCount) {
         this.drawCount = drawCount;
     }
+    
+    public void win() {
+        winCount++;
+    }
+    
+    public void lose() {
+        loseCount++;
+    }
+    
+    public void draw() {
+        drawCount++;
+    }
 }
