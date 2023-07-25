@@ -11,6 +11,7 @@ package com.mycompany.lab4;
 public class Lab4 {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        Game game = new Game();
+        game.play();
     }
 }
