@@ -3,13 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.mycompany.lab4;
-
 import java.util.Scanner;
 
-/**
- *
- * @author pondz
- */
 public class Game {
 
     private Player player1, player2;
@@ -18,12 +13,12 @@ public class Game {
     public Game() {
         player1 = new Player('X');
         player2 = new Player('O');
+        table = new Table(player1, player2); // Initialize the table here
     }
 
     public void play() {
         boolean isFinish = false;
         printWelcome();
-        newGame();
         while (!isFinish) {
             printTable();
             printTurn();
@@ -32,16 +27,15 @@ public class Game {
                 printTable();
                 printWinner();
                 isFinish = true;
-
-            }
-            if (table.checkDraw()) {
+            } else if (table.checkDraw()) {
                 printTable();
                 printDraw();
                 isFinish = true;
             }
             table.switchPlayer();
         }
-
+        askForNewGame(); // Ask if players want to continue playing
+        System.out.println("End");
     }
 
     private void printWelcome() {
@@ -66,16 +60,21 @@ public class Game {
         table.setPosition(position);
     }
 
-    private void newGame() {
-        table = new Table(player1,player2);
-    }
-
     private void printWinner() {
-        System.out.println(table.getCurrentPlayer() + "Win"); 
+        System.out.println(table.getCurrentPlayer().getSymbol() + " Win");
     }
 
     private void printDraw() {
-        System.out.println("Draw"); 
+        System.out.println("Draw");
     }
 
+    private void askForNewGame() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Do you want to play again? (yes/no)");
+        String response = sc.next().toLowerCase();
+        if (response.equals("yes")) {
+            table.clearTable(); // Clear the table for a new game
+            play(); // Start a new game
+        }
+    }
 }

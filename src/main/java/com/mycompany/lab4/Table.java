@@ -13,6 +13,7 @@ public class Table {
     private char[] table = {'1', '2', '3', '4', '5', '6', '7', '8', '9'};
     private Player player1, player2, currentPlayer;
     private int count;
+
     public Table(Player player1, Player player2) {
         this.player1 = player1;
         this.player2 = player2;
@@ -41,6 +42,20 @@ public class Table {
 
     public boolean checkWin() {
         if (checkRow1()) {
+            return true;
+        } else if (checkRow2()) {
+            return true;
+        } else if (checkRow3()) {
+            return true;
+        } else if (checkCol1()) {
+            return true;
+        } else if (checkCol2()) {
+            return true;
+        } else if (checkCol3()) {
+            return true;
+        } else if (checkDiagonalLeft()) {
+            return true;
+        } else if (checkDiagonalRight()) {
             return true;
         }
         saveWin();
@@ -120,13 +135,13 @@ public class Table {
             player1.lose();
         }
     }
-    
+
     public boolean checkDraw() {
-        if(count==9) {
+        if (count == 9) {
             player1.draw();
             player2.draw();
             return true;
-        }else{
+        } else {
             return false;
         }
     }
@@ -134,9 +149,14 @@ public class Table {
     void switchPlayer() {
         if (currentPlayer == player1) {
             currentPlayer = player2;
-        }else{
+        } else {
             currentPlayer = player1;
         }
+    }
+
+    public void clearTable() {
+        table = new char[]{'1', '2', '3', '4', '5', '6', '7', '8', '9'};
+        count = 0; // Reset the count to 0 for a new game
     }
 
 }
